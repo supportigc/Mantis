@@ -50,6 +50,8 @@ require_once( 'file_api.php' );
 
 require_once( 'bug_group_action_api.php' );
 
+require_once( 'toto.php' );
+
 # --------------------
 # Print the headers to cause the page to redirect to $p_url
 # If $p_die is true (default), terminate the execution of the script
