@@ -526,6 +526,7 @@
 		'due_date',
 	);
 	
-	
+	# liste des user id ayant accès à la transmissions des DE
+	$g_trans_dev_de_users =	array (30, 38);
 	
 ?>

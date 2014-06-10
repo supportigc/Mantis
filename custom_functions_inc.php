@@ -104,9 +104,23 @@ function custom_function_override_print_bug_view_page_custom_buttons( $p_bug_id 
 	echo '<td class="center">';
 	$p_is_difffernet_project = true;
 	$t_bug_array = relationship_get_all($p_bug_id, $p_is_difffernet_project);
-
-	if( access_has_bug_level( config_get( 'trans_dev_bug_threshold' ), $p_bug_id ) 
-		&& bug_get_field( $p_bug_id, 'status' ) < 70
+	# on verifie que l'utilisateur fait partie des reponsables consultants
+	$p_user_array = config_get( 'trans_dev_de_users' );
+	$p_user_id = auth_get_current_user_id();
+	$p_is_trans_dev_de_user = false;
+	
+	foreach($p_user_array as $t_user_id) {
+		if ($p_user_id == $t_user_id) {
+			$p_is_trans_dev_de_user = true;
+		}
+	}
+	
+	
+	if( ((access_has_bug_level( config_get( 'trans_dev_bug_threshold' ), $p_bug_id ) 
+				&& bug_get_field( $p_bug_id, 'status' ) < 70)
+			|| ($p_is_trans_dev_de_user 
+				&& bug_get_field( $p_bug_id, 'status' ) == 10 
+				&& category_get_name( bug_get_field( $p_bug_id, 'category_id')) == 'DEMANDE d\'évolution'))
 		&& empty($t_bug_array)) {
 		html_button( 'bug_actiongroup_page.php', lang_get( 'transmit_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'EXT_TRANS_DEV' ) );
 	}
