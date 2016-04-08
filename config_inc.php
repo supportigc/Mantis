@@ -43,7 +43,7 @@
         # in Windows).
         # For more details on unix style permissions:
         # http://www.perlfect.com/articles/chmod.shtml
-        $g_attachments_file_permissions = 0400;
+        $g_attachments_file_permissions = 0444;
 
         # FTP settings, used if $g_file_upload_method = FTP
         $g_file_upload_ftp_server       = 'ftp.myserver.com';
@@ -528,5 +528,12 @@
 	
 	# liste des user id ayant accès à la transmissions des DE
 	$g_trans_dev_de_users =	array (30, 38);
+	
+	# on modifie les deux vaaibles ci dessous pour que 
+	# 1) on puisse affecter des fiches aux testerus 
+	# 2) Le bouton assigné à ne soit accessibles qu'au développeur. 
+	$g_handle_bug_threshold			= REPORTER;
+	$g_update_bug_assign_threshold			= DEVELOPER;
+	
 	
 ?>
